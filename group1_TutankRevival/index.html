@@ -1,0 +1,595 @@
+<!doctype html> 
+<html lang="en">
+   <head>
+      <meta charset="UTF-8" />
+      <title>main page</title>
+      <script src="//cdn.jsdelivr.net/npm/phaser@3.11.0/dist/phaser.js"></script>
+      <script src="phaser.js"></script>
+      <script  type="text/javascript" src="mainMap.js"></script>
+      <script  type="text/javascript" src="sdv4.js"></script>  
+      <script  type="text/javascript" src="sdv3.js"></script>
+	  <script  type="text/javascript" src="sdv5.js"></script>
+	  <script  type="text/javascript" src="sdv6.js"></script>
+	  <script  type="text/javascript" src="sdv7.js"></script>
+	  <script  type="text/javascript" src="minigame5.js"></script>
+	  <script  type="text/javascript" src="minigame6.js"></script>
+   </head>
+   <body>
+      <script type="text/javascript">   
+         var player;
+         var playerX=22;
+         var playerY=637;
+         var map;
+         var text,popTxt;
+         
+         var cursors;
+         var jew;
+         var path;
+         var graphics;
+         var score = 0;
+         var lifePoint = 100;
+         var jell1, jell2, jell3,jell11,jell22,jell33;
+         var bat1, bat2, bat3;
+         var arrows;
+         var door1,door2,door3,door4,door5,door6,door7;
+         var gateKep1,gateKep2,gateKep3,gateKep4,gateKep5,gateKep6,gateKep7;
+         var success1=false,success2=false,success3=false,success4=false,success5=false,success6=false;
+         var kaogu;
+		 var lastDoor;
+		 var openDoor,pickup,wound;
+ 		 var objectLayer,topLayer;
+ 		 var tileset2,tileset3,tileset4;
+ 		 var tileset5,tileset6,bgLayer;
+         var achFlag=false;
+       	 var retry;
+		 //-------sdv5
+		 var gameIntro2;
+		 var gameStart2;
+		 var start2=false;
+         var player51;
+		 var graphics;
+         var find3=false;
+         var find4=false;
+		 var j1;
+		 var j2;
+		 var j3;
+		 var wall2;
+		 var wall3;
+		 var wall1;
+         var textt;
+		 
+		 //-------sdv6
+		 var gameIntro3;
+		 var gameStart3;
+		 var start3=false;
+		 var scoreText;
+		 var rotateSpeed=6;
+		 var throwSpeed=150;
+		 var minAngle=10;
+		 var score6 = 0
+		 //var graphics;
+		 var circle;
+		 var gameOver = false;
+		 var point;
+		 var hint;
+		 var a = 0;
+
+		 //-------sdv7
+		 var gameIntro4;
+		 var gameStart4;
+		 var start4=false;
+		 var rotationSpeed7=4.5;
+		 var throwSpeed7=150;
+		 var minAngle7=15;
+		 var changeTime=2000;
+		 var maxRotationSpeed=6;
+		 var rotationVariation=2;
+		 var chancetext;
+         
+		 //-------sdv4	
+		 var gameIntro1;
+		 var gameStart1;
+		 var start1=false;
+         var player4;
+		 var key;
+		 var key2;
+         var platforms;
+         var keys;
+         var find1=false;
+         var find2=false;
+         var hint4;
+		 var timedEvent;
+         var text;
+         var currenttime = 400;
+		 var count1=0;
+		 
+		 //-------sdv3
+		 var doubleJumpFinal = 0;
+		 var countFinal = 0;
+		 var gameIntroFinal;
+		 var gameStartFinal;
+		 var startFinal=false;
+         var bluefs;
+         var ftimedEvent;
+         var player3;
+         var stars;
+         var bombs;
+         var platforms3;
+         var cursors3;
+         var target2;
+		 var target;
+         var gameOver = false;
+         var portal;
+		 
+		 //--------minigame5
+		 var doubleJump5 = 0;
+		 var gameOver5 = false;
+		 var start5 = false;
+		 var rocks5;
+		 var player5;
+		 var now5;
+		 var gameFinish_lose5;
+		 var gameFinish_win5;
+		 var count5=0;
+		 var gameStart5;
+		 var gameIntro5;
+		 var platforms5;
+		 var door5;
+		 var arrows5;
+		 
+		 //--------minigame6
+		 var doubleJump6 = 0;
+		 var gameOver6 = false;
+		 var start6 = false;
+		 var rocks6;
+		 var player6;
+		 var now6;
+		 var gameFinish_lose6;
+		 var gameFinish_win6;
+		 var count6=0;
+		 var gameStart6;
+		 var gameIntro6;
+		 var platforms6;
+		 var door6;
+		 var arrows6;
+		 
+	class bootScene extends Phaser.Scene {
+		constructor() {
+			super("bootScene");
+		}
+		
+		preload ()
+		{
+			//load bootScene asset
+			this.load.image('starting', 'asset/starting page_n.png');
+			this.load.audio('startBg', [
+				'asset/audio/start bg.ogg',
+				'asset/audio/start bg.m4a'
+			]);
+			
+			//loading bar
+			let loadingBar = this.add.graphics({
+				fillStyle:{
+					color: 0xffffff //white
+				}
+			})
+			for (let i=0;i<100;i++){
+				this.load.image('title'+i, 'asset/Title.png');
+			}
+			this.load.on("progress",(percent)=>{
+				loadingBar.fillRect(0, this.game.renderer.height/2, this.game.renderer.width*percent, 50);
+				//console.log(percent);
+			})
+		}
+	
+		create ()
+		{
+			//set bootScene layout
+			var starting = this.add.image(0, 0, 'starting').setOrigin(0);
+			var startBg = this.sound.add('startBg');
+			
+			//start background music
+			startBg.play();
+			
+			//change scene to main men
+			this.cameras.main.fade(5000, 0, 0, 0);
+			this.cameras.main.on('camerafadeoutcomplete', function () {
+				this.scene.start('starting');
+			}, this);
+		}
+
+	}
+	
+	class Starting extends Phaser.Scene {
+		
+		Starting(){
+			Phaser.Scene.call(this, { key: 'starting' });
+		}
+		
+		preload() {
+			//load main menu asset
+			this.load.image('bg_starting', 'asset/background_n.png');
+			this.load.image('title', 'asset/Title.png');
+			this.load.image('start', 'asset/button_start.png');
+			this.load.image('method', 'asset/button_method.png');
+			this.load.image('producer', 'asset/button_producer.png');
+			this.load.image('character', 'asset/button_character.png');
+			this.load.image('dieGodR', 'asset/Die god R.png');
+			this.load.image('dieGodL', 'asset/Die god L.png');
+			this.load.image('stick', 'asset/stick_n_41.png',{
+				frameHeight:16,
+				frameWidth:16
+			});
+			this.load.audio('startOption', [
+				'asset/audio/start option.mp3'				
+			]);			
+		}
+		
+		create() {
+			this.cameras.main.fadeFrom(1000, 0, 0, 0);
+			
+			//set main menu layout
+			var bg_starting = this.add.image(0, 0, 'bg_starting').setOrigin(0);
+			var title = this.add.image(this.game.renderer.width*.51, this.game.renderer.height*.45, 'title');
+			title.setScale(1.5);
+			var start = this.add.image(this.game.renderer.width*.51, this.game.renderer.height*.68, 'start');
+			start.setScale(1);
+			var character = this.add.image(this.game.renderer.width*.51, this.game.renderer.height*.74, 'character');	
+			character.setScale(1);
+			var method = this.add.image(this.game.renderer.width*.51, this.game.renderer.height*.80, 'method');
+			method.setScale(1);
+			var producer = this.add.image(this.game.renderer.width*.51, this.game.renderer.height*.86, 'producer');	
+			producer.setScale(1);
+			var stick = this.add.sprite(100,100,'stick');
+			stick.setVisible(false);
+			stick.setAngle(-45);
+			var dieGodL = this.add.sprite(this.game.renderer.width*.51+300,this.game.renderer.height*.80,'dieGodL');
+			dieGodL.setScale(0.7);
+			dieGodL.setAlpha(0.7);
+			var dieGodR = this.add.sprite(this.game.renderer.width*.51-300,this.game.renderer.height*.80,'dieGodR');
+			dieGodR.setScale(0.7);
+			dieGodR.setAlpha(0.7);
+			var scene = this.scene;
+			var cameras = this.cameras;
+			
+			//set sound of button selection
+			var startOption = this.sound.add('startOption');
+		
+			//button animation
+			start.setInteractive();
+			character.setInteractive();
+			method.setInteractive();
+			producer.setInteractive();
+		
+			//start button function
+			start.on("pointerover",()=>{
+				stick.setVisible(true);
+				stick.x = start.x+start.width-50;
+				stick.y = start.y;
+				startOption.play();
+			})
+			start.on("pointerout",()=>{
+				stick.setVisible(false);
+			})
+			start.on('pointerdown', function (pointer) {
+				//!!!!!!!!!!!!change scene to main map!!!!!!!!!!!!!!!!!!!!!		
+				cameras.main.fade(500, 0, 0, 0);
+				cameras.main.on('camerafadeoutcomplete', function () {
+					
+					scene.start('mainMap');
+				}, this);
+			})
+			
+			//method button function
+			method.on("pointerover",()=>{
+				stick.setVisible(true);
+				stick.x = method.x+method.width-50;
+				stick.y = method.y;
+				startOption.play();
+			})
+			method.on("pointerout",()=>{
+				stick.setVisible(false);
+			})
+			method.on('pointerdown', function (pointer) {
+				
+				cameras.main.fade(500, 0, 0, 0);
+				cameras.main.on('camerafadeoutcomplete', function () {
+					
+					scene.start('method');
+				}, this);
+			})
+			
+			//producer button function
+			producer.on("pointerover",()=>{
+				stick.setVisible(true);
+				stick.x = producer.x+producer.width-50;
+				stick.y = producer.y;
+				startOption.play();
+			})
+			producer.on("pointerout",()=>{
+				stick.setVisible(false);
+			})
+			producer.on('pointerdown', function (pointer) {
+				
+				cameras.main.fade(500, 0, 0, 0);
+				cameras.main.on('camerafadeoutcomplete', function () {
+					
+					scene.start('producer');
+				}, this);
+			})
+			
+			//character button function
+			character.on("pointerover",()=>{
+				stick.setVisible(true);
+				stick.x = character.x+character.width-50;
+				stick.y = character.y;
+				startOption.play();
+			})
+			character.on("pointerout",()=>{
+				stick.setVisible(false);
+			})
+			character.on('pointerdown', function (pointer) {
+				
+				cameras.main.fade(500, 0, 0, 0);
+				cameras.main.on('camerafadeoutcomplete', function () {
+					
+					scene.start('character');
+				}, this);
+			})
+		}
+	}
+    
+	class Method extends Phaser.Scene{
+		Method(){
+			Phaser.Scene.call(this, { key: 'method' });
+		}
+		
+		preload(){
+			//load method asset
+			this.load.image('buttonbg', 'asset/buttonBg.png');
+			this.load.image('introBg', 'asset/introBg.png');
+			this.load.image('method', 'asset/button_method.png');
+			this.load.image('back', 'asset/button_back.png');
+			this.load.image('keyboard', 'asset/keyboard.png');
+			this.load.image('mouse', 'asset/mouse.png');
+			this.load.image('word', 'asset/method_word.png');
+			this.load.audio('startOption', [
+				'asset/audio/start option.mp3'				
+			]);
+		}
+		
+		create(){
+			this.cameras.main.fadeFrom(1000, 0, 0, 0);
+			
+			//set method layout
+			var buttonbg = this.add.image(0, 0, 'buttonbg').setOrigin(0);
+			var introBg = this.add.image(190, 100, 'introBg').setOrigin(0).setScale(2.8);
+			var method = this.add.image(this.game.renderer.width*.51, this.game.renderer.height*.15, 'method');
+			method.setScale(2);
+			var back = this.add.image(this.game.renderer.width*.51, this.game.renderer.height*.82, 'back');
+			back.setScale(1.5);
+			var keyboard = this.add.image(this.game.renderer.width*.39, this.game.renderer.height*.50, 'keyboard');
+			keyboard.setScale(1.5);
+			var mouse = this.add.image(this.game.renderer.width*.69, this.game.renderer.height*.50, 'mouse');
+			mouse.setScale(1.5);
+			var word = this.add.image(this.game.renderer.width*.51, this.game.renderer.height*.25, 'word');
+			var cameras = this.cameras;
+			var scene = this.scene;
+			var startOption = this.sound.add('startOption');
+			
+			//button animation
+			back.setInteractive();
+			back.on("pointerover",()=>{
+				startOption.play();
+			})
+			
+			//back button function
+			back.on('pointerdown', function (pointer) {
+				
+				cameras.main.fade(1000, 0, 0, 0);
+				cameras.main.on('camerafadeoutcomplete', function () {	
+					scene.start('starting');
+				}, this);
+			})
+		}
+	}
+	
+	class Producer extends Phaser.Scene{
+		Producer(){
+			Phaser.Scene.call(this, { key: 'producer' });
+		}
+		
+		preload(){
+			//load producer asset
+			this.load.image('buttonbg', 'asset/buttonBg.png');
+			this.load.image('introBg', 'asset/introBg.png');
+			this.load.image('producer', 'asset/button_producer.png');
+			this.load.image('back', 'asset/button_back.png');
+			this.load.image('name', 'asset/producer.png');
+			this.load.audio('startOption', [
+				'asset/audio/start option.mp3'				
+			]);
+		}
+		
+		create(){
+			this.cameras.main.fadeFrom(1000, 0, 0, 0);
+			
+			//set producer layout
+			var buttonbg = this.add.image(0, 0, 'buttonbg').setOrigin(0);
+			var introBg = this.add.image(190, 100, 'introBg').setOrigin(0).setScale(2.8);
+			var producer = this.add.image(this.game.renderer.width*.51, this.game.renderer.height*.15, 'producer');
+			producer.setScale(2);
+			var back = this.add.image(this.game.renderer.width*.51, this.game.renderer.height*.82, 'back');
+			back.setScale(1.5);
+			var name = this.add.image(this.game.renderer.width*.51, this.game.renderer.height*.50, 'name');
+			name.setScale(1.2);	
+			var cameras = this.cameras;
+			var scene = this.scene;
+			var startOption = this.sound.add('startOption');
+			
+			//button animation
+			back.setInteractive();
+			
+			//back button function
+			back.on("pointerover",()=>{
+				startOption.play();
+			})
+			back.on('pointerdown', function (pointer) {
+				
+				cameras.main.fade(1000, 0, 0, 0);
+				cameras.main.on('camerafadeoutcomplete', function () {	
+					scene.start('starting');
+				}, this);
+			})
+		}
+	}
+	
+	class Character extends Phaser.Scene{
+		Character(){
+			Phaser.Scene.call(this, { key: 'character' });
+		}
+		
+		preload(){
+			//load character asset
+			this.load.image('buttonbg', 'asset/buttonBg.png');
+			this.load.image('character', 'asset/button_character.png');
+			this.load.image('back', 'asset/button_back.png');
+			this.load.image('click', 'asset/button_click.png');
+			this.load.image('p', 'asset/pIntro.png');
+			this.load.image('k', 'asset/kIntro.png');
+			this.load.image('q', 'asset/qIntro.png');
+			this.load.image('m', 'asset/mIntro.png');
+			this.load.audio('startOption', [
+				'asset/audio/start option.mp3'				
+			]);
+		}
+		
+		create(){
+			this.cameras.main.fadeFrom(1000, 0, 0, 0);
+			
+			//set character layout
+			var buttonbg = this.add.image(0, 0, 'buttonbg').setOrigin(0);
+			var p = this.add.image(190,100,'p').setScale(2.8).setOrigin(0);
+			p.setVisible(true);
+			var k = this.add.image(190,100,'k').setScale(2.8).setOrigin(0);
+			k.setVisible(false);
+			var q = this.add.image(190,100,'q').setScale(2.8).setOrigin(0);
+			q.setVisible(false);
+			var m = this.add.image(190,100,'m').setScale(2.8).setOrigin(0);
+			m.setVisible(false);
+			var character = this.add.image(this.game.renderer.width*.51, this.game.renderer.height*.15, 'character');
+			character.setScale(2);
+			var back = this.add.image(this.game.renderer.width*.51, this.game.renderer.height*.82, 'back');
+			back.setScale(1.5);
+			var click = this.add.image(this.game.renderer.width*.80, this.game.renderer.height*.82, 'click');
+			click.setScale(1.5);			
+			var cameras = this.cameras;
+			var scene = this.scene;
+			var startOption = this.sound.add('startOption');
+			var count =1;
+			
+			//button animation
+			back.setInteractive();
+			click.setInteractive();
+			
+			//back button function
+			back.on("pointerover",()=>{
+				startOption.play();
+			})
+			back.on('pointerdown', function (pointer) {
+				
+				cameras.main.fade(1000, 0, 0, 0);
+				cameras.main.on('camerafadeoutcomplete', function () {	
+					scene.start('starting');
+				}, this);
+			})
+			
+			//click button function
+			click.on("pointerover",()=>{
+				startOption.play();
+			})
+			click.on('pointerdown', function (pointer) {
+				startOption.play();
+				if (count ==1){
+					p.setVisible(true);
+					m.setVisible(false);
+					count +=1;
+				}else if (count ==2){
+					k.setVisible(true);
+					p.setVisible(false);
+					count +=1;
+				}else if (count ==3){
+					q.setVisible(true);
+					k.setVisible(false);
+					count +=1;
+				}else{
+					m.setVisible(true);
+					q.setVisible(false);
+					count =1;
+				}
+			})
+		}
+	}
+	
+	class ending extends Phaser.Scene {
+		constructor() {
+			super("ending");
+		}
+		
+		preload ()
+		{
+			//load bootScene asset
+			this.load.image('ending', 'asset/starting page_n.png');
+			this.load.image('endingWord', 'asset/endingWord.png');
+		}
+		create ()
+		{
+			this.cameras.main.fadeFrom(2000, 0, 0, 0);
+			var endingScene = this.add.image(0, 0, 'ending').setOrigin(0);
+			var endingWord = this.add.image(this.game.renderer.width*.50, this.game.renderer.height*.55,'endingWord').setScale(2);
+			
+		}
+
+	}
+		 //---------------------------------------config------------------------------------
+         var config = {
+            type: Phaser.AUTO,
+			scale: {
+				mode: Phaser.Scale.NONE,
+				autoCenter: Phaser.Scale.CENTER_BOTH,
+         
+				width: 1920, // Canvas width in pixels
+				height: 1080, // Canvas height in pixels
+			},
+            //backgroundColor: '#f3bf53',
+            pixelArt: true,
+            physics: {
+                 default: "arcade",
+                 arcade: {
+                     gravity: {
+                         y: 0
+                     },
+                     debug: false
+                 }
+            },
+            scene: bootScene 
+                 //[mainMap,sdv11,sdv3,sdv4,sdv5,sdv6,sdv7]
+             
+         };
+         var game = new Phaser.Game(config);
+        game.scene.add('starting',Starting);
+		game.scene.add('character',Character);
+		game.scene.add('method',Method);
+		game.scene.add('producer',Producer);
+		game.scene.add('mainMap',mainMap);
+		game.scene.add('ending',ending);
+		game.scene.add('sdv3',sdv3);
+		game.scene.add('sdv4',sdv4);
+		game.scene.add('sdv5',sdv5);
+		game.scene.add('sdv6',sdv6);
+		game.scene.add('sdv7',sdv7);
+		game.scene.add('minigame5',minigame5);
+		game.scene.add('minigame6',minigame6);
+      </script>
+   </body>
+</html>

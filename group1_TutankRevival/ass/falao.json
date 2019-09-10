@@ -1,0 +1,92 @@
+{"frames": [
+
+{
+	"filename": "1left.png",
+	"frame": {"x":1,"y":1,"w":50,"h":80},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":80},
+	"sourceSize": {"w":50,"h":80}
+},
+{
+	"filename": "2left.png",
+	"frame": {"x":1,"y":83,"w":50,"h":80},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":80},
+	"sourceSize": {"w":50,"h":80}
+},
+{
+	"filename": "3left.png",
+	"frame": {"x":1,"y":1,"w":50,"h":80},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":80},
+	"sourceSize": {"w":50,"h":80}
+},
+{
+	"filename": "4left.png",
+	"frame": {"x":1,"y":165,"w":50,"h":80},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":80},
+	"sourceSize": {"w":50,"h":80}
+},
+{
+	"filename": "5.png",
+	"frame": {"x":1,"y":247,"w":50,"h":80},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":80},
+	"sourceSize": {"w":50,"h":80}
+},
+{
+	"filename": "6right.png",
+	"frame": {"x":1,"y":329,"w":50,"h":80},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":80},
+	"sourceSize": {"w":50,"h":80}
+},
+{
+	"filename": "7right.png",
+	"frame": {"x":1,"y":411,"w":50,"h":80},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":80},
+	"sourceSize": {"w":50,"h":80}
+},
+{
+	"filename": "8right.png",
+	"frame": {"x":1,"y":493,"w":50,"h":80},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":80},
+	"sourceSize": {"w":50,"h":80}
+},
+{
+	"filename": "Flo正面2.png",
+	"frame": {"x":1,"y":575,"w":50,"h":80},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":80},
+	"sourceSize": {"w":50,"h":80}
+},
+{
+	"filename": "Flo背面.png",
+	"frame": {"x":1,"y":657,"w":50,"h":80},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":80},
+	"sourceSize": {"w":50,"h":80}
+}],
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "falao.png",
+	"format": "RGBA8888",
+	"size": {"w":52,"h":738},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:1d3d9fb73ce665f95139171455fada78:75f4e5ad97d762f2b75b9266432f4502:26e37e85bbd7e1782c23dd4b8ae33980$"
+}
+}
